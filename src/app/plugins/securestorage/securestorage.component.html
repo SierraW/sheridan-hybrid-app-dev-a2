@@ -1,0 +1,16 @@
+{{msg}}
+<ion-item>
+  <ion-label>Key</ion-label>
+  <ion-input type="text" [(ngModel)]="inKey"></ion-input>
+  <ion-label>Value</ion-label>
+  <ion-input [(ngModel)]="inValue"></ion-input><br>
+</ion-item>
+
+<ion-button (click)="addRec()">Insert Record</ion-button>
+<ion-button (click)="showAll()">Show All Records</ion-button>
+<ion-button (click)="removeAll()">Remove All Records</ion-button>
+<ion-button (click)="removeRec()">Remove One Record</ion-button>
+
+<ion-item *ngFor="let item of values">
+  <ion-label>{{item.key}} {{item.value}}</ion-label>
+</ion-item>
