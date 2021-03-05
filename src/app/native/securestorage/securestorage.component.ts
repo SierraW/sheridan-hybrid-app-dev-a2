@@ -12,10 +12,6 @@ export class SecurestorageComponent implements OnInit {
   inKey; inValue; keys: any[]; values: KeyValue[] = [];
 
   constructor(private secureStorage: SecureStorage) {
-    this.secureStorage.create('storage')
-      .then((storage: SecureStorageObject) => {
-        console.log('SecureStorage opened/created');
-      });
   }
 
   ngOnInit() {}
@@ -41,10 +37,9 @@ export class SecurestorageComponent implements OnInit {
     this.secureStorage.create('storage')
       .then((storage: SecureStorageObject) => {
         storage.set(this.inKey, this.inValue)
-          .then(data => {
+          .then(() => {
             this.msg = 'Record inserted';
-            // showAll()
-          }, error => console.log('Record Not Inserted'));
+          }, () => console.log('Record Not Inserted'));
       });
   }
 
@@ -52,10 +47,10 @@ export class SecurestorageComponent implements OnInit {
     this.secureStorage.create('storage')
       .then((storage: SecureStorageObject) => {
         storage.remove(this.inKey)
-          .then(data => {
+          .then(() => {
             this.msg = 'Record deleted';
             this.showAll();
-          }, error => this.msg = 'Record Not Deleted');
+          }, () => this.msg = 'Record Not Deleted');
       });
   }
 
@@ -63,10 +58,10 @@ export class SecurestorageComponent implements OnInit {
     this.secureStorage.create('storage')
       .then((storage: SecureStorageObject) => {
         storage.clear()
-          .then(data => {
+          .then(() => {
             this.msg = 'Records Deleted';
             this.values = [];
-          }, error => this.msg = 'Records Not Deleted');
+          }, () => this.msg = 'Records Not Deleted');
       });
   }
 

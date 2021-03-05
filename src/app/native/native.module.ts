@@ -12,4 +12,4 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [SecurestorageComponent, AppversionComponent]
 })
-export class PluginsModule { }
+export class NativeModule { }

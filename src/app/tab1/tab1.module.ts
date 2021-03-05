@@ -6,7 +6,7 @@ import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-import {PluginsModule} from '../plugins/plugins.module';
+import {NativeModule} from '../native/native.module';
 import {GreetingsComponent} from './greetings/greetings.component';
 import {StorageManagerComponent} from './storage-manager/storage-manager.component';
 
@@ -17,7 +17,7 @@ import {StorageManagerComponent} from './storage-manager/storage-manager.compone
         FormsModule,
         ExploreContainerComponentModule,
         Tab1PageRoutingModule,
-        PluginsModule
+        NativeModule
     ],
   declarations: [Tab1Page, GreetingsComponent, StorageManagerComponent]
 })
