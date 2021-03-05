@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Product} from '../../models/Product';
+import {StorageService} from '../../storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-storage-display',
@@ -7,8 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StorageDisplayComponent implements OnInit {
 
-  constructor() { }
+  error: string;
+  products: Product[];
+  constructor(private sharedData: StorageService, private router: Router) { }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.error = '';
+    this.getProducts();
+  }
+  getProducts() {
+    this.sharedData.getProducts().then(products => this.products = products).catch(err => this.error = err);
+  }
+  redirect(product: Product) {
+    this.router.navigate(['tabs/tab4'], {state: {product}}).then();
+  }
 }

@@ -3,9 +3,11 @@
     <ion-card-subtitle>All Products</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
-    <ion-text *ngIf="error !== ''" color="error"><p>Failed to retrieve data: {{error}}</p></ion-text>
-    <ion-list *ngIf="error === ''">
-      <ion-item *ngFor="let product of products" (click)="redirect(product)">
+    <ion-input type="text" placeholder="Product id (e.g. 123456789)" [(ngModel)]="searchString"></ion-input>
+    <ion-button (click)="search()">Search</ion-button>
+    <ion-text *ngIf="searchProducts.length === 0" color="error"><p>No result.</p></ion-text>
+    <ion-list *ngIf="searchProducts.length > 0">
+      <ion-item *ngFor="let product of searchProducts" (click)="redirect(product)">
         <ion-text>
           <p>{{product.productId}}</p>
           <h3>{{product.description}}</h3>
@@ -14,6 +16,6 @@
         </ion-text>
       </ion-item>
     </ion-list>
-    <ion-button (click)="getProducts()">Refresh</ion-button>
+    <ion-button (click)="search()">Refresh</ion-button>
   </ion-card-content>
 </ion-card>
