@@ -15,11 +15,8 @@ export class StorageManagerComponent implements OnInit {
 
   ngOnInit() {
     this.sharedData.sharedCurrentStorageString.subscribe(storage => this.storage = storage);
+    this.storageArr = [];
     this.storageArr.push(this.storage);
-    this.secureStorage.create(this.storage)
-      .then(() => {
-        console.log('SecureStorage opened/created');
-      });
   }
 
   selectStorage(storageString: string) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from '../../models/Product';
+import {StorageService} from '../../storage.service';
 
 @Component({
   selector: 'app-storage-add-record',
@@ -8,13 +9,25 @@ import {Product} from '../../models/Product';
 })
 export class StorageAddRecordComponent implements OnInit {
 
-  product: Product;
-  constructor() { }
+  productId: string;
+  description: string;
+  quantityOnHand: number;
+  pricePerUnit: number;
+  reorderQuantity: number;
+  constructor(private sharedData: StorageService) { }
 
   ngOnInit() {
   }
 
   insert() {
-
+    this.sharedData.addProduct(
+      [{
+          productId: this.productId,
+        description: this.description,
+        quantityOnHand: this.quantityOnHand,
+        pricePerUnit: this.pricePerUnit,
+        reorderQuantity: this.reorderQuantity
+      }]
+    ).then(() => console.log('Insert successful.'));
   }
 }
