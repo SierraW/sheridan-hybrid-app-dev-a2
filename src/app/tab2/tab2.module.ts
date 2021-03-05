@@ -6,7 +6,7 @@ import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
-import {NativeModule} from '../native/native.module';
+import {StorageAddRecordComponent} from './storage-add-record/storage-add-record.component';
 
 @NgModule({
     imports: [
@@ -14,9 +14,8 @@ import {NativeModule} from '../native/native.module';
         CommonModule,
         FormsModule,
         ExploreContainerComponentModule,
-        Tab2PageRoutingModule,
-        NativeModule
+        Tab2PageRoutingModule
     ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page, StorageAddRecordComponent]
 })
 export class Tab2PageModule {}
