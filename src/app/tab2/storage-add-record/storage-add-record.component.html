@@ -1,0 +1,18 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title></ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-label>Product Id</ion-label>
+    <ion-input type="text" [(ngModel)]="product.productId"></ion-input>
+    <ion-label>Description</ion-label>
+    <ion-input type="text" [(ngModel)]="product.description"></ion-input>
+    <ion-label>Quantity On Hand</ion-label>
+    <ion-input type="number" [(ngModel)]="product.quantityOnHand"></ion-input>
+    <ion-label>Price Per Unit</ion-label>
+    <ion-input type="number" [(ngModel)]="product.pricePerUnit"></ion-input>
+    <ion-label>Reorder Quantity</ion-label>
+    <ion-input type="number" [(ngModel)]="product.reorderQuantity"></ion-input>
+    <ion-button type="submit" (click)="insert()">Insert!</ion-button>
+  </ion-card-content>
+</ion-card>

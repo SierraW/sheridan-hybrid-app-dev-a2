@@ -7,6 +7,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import {PluginsModule} from '../plugins/plugins.module';
+import {GreetingsComponent} from './greetings/greetings.component';
+import {StorageManagerComponent} from './storage-manager/storage-manager.component';
 
 @NgModule({
     imports: [
@@ -17,6 +19,6 @@ import {PluginsModule} from '../plugins/plugins.module';
         Tab1PageRoutingModule,
         PluginsModule
     ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page, GreetingsComponent, StorageManagerComponent]
 })
 export class Tab1PageModule {}

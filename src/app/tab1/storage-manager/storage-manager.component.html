@@ -1,0 +1,16 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Storage Manager</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-label>Current Storage</ion-label>
+    <ion-input type="text" [(ngModel)]="storage"></ion-input>
+    <ion-button (click)="addStorage()">Add Storage</ion-button>
+    <ion-button (click)="insertInitialValue()">Insert Initial Value</ion-button>
+    <ion-list>
+      <ion-item *ngFor="let storageString of storageArr">
+        <p (click)="selectStorage(storageString)">{{storageString}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

@@ -1,7 +1,7 @@
 export interface Product {
   productId: string;
   description: string;
-  quantityOnHand: bigint;
+  quantityOnHand: number;
   pricePerUnit: number;
-  reorderQuantity: bigint;
+  reorderQuantity: number;
 }
