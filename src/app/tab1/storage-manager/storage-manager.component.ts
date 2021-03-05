@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {StorageService} from '../../storage.service';
-import { SecureStorage } from '@ionic-native/secure-storage/ngx';
 
 @Component({
   selector: 'app-storage-manager',
@@ -11,7 +10,7 @@ export class StorageManagerComponent implements OnInit {
   storage: string;
   storageArr: string[];
 
-  constructor(private sharedData: StorageService, private secureStorage: SecureStorage) {}
+  constructor(private sharedData: StorageService) {}
 
   ngOnInit() {
     this.sharedData.sharedCurrentStorageString.subscribe(storage => this.storage = storage);

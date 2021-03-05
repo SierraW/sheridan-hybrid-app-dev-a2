@@ -65,8 +65,11 @@ export class StorageEditComponent implements OnInit {
     await alert.present();
     await alert.onDidDismiss();
     if (shouldExit) {
-      this.outputDeleted.emit(true);
+      this.redirect();
     }
   }
 
+  redirect() {
+    this.outputDeleted.emit(true);
+  }
 }

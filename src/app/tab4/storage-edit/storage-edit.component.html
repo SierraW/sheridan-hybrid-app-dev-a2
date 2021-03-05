@@ -5,6 +5,7 @@
   </ion-card-header>
   <ion-card-content>
     <ion-button (click)="refresh()">Refresh</ion-button>
+    <ion-text *ngIf="!product" color="error" (click)="redirect()"><p>No item selected!</p></ion-text>
     <ion-item *ngIf="product">
       <ion-label>Product Id</ion-label>
       <ion-input type="text" [(ngModel)]="product.productId"></ion-input>
