@@ -22,6 +22,6 @@ export class StorageSearchComponent implements OnInit {
     this.searchProducts = this.sharedData.getProducts(this.searchString);
   }
   redirect(product: Product) {
-    this.router.navigate(['tabs/tab4'], {state: {product}}).then();
+    this.router.navigate(['tabs/tab4'], {state: {pid: product.productId}}).then();
   }
 }

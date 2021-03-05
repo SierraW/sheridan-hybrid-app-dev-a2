@@ -1,3 +1,23 @@
-<p>
-  storage-edit works!
-</p>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Product Editor</ion-card-title>
+    <ion-card-subtitle>id: {{pid}}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-button (click)="refresh()">Refresh</ion-button>
+    <ion-item *ngIf="product">
+      <ion-label>Product Id</ion-label>
+      <ion-input type="text" [(ngModel)]="product.productId"></ion-input>
+      <ion-label>Description</ion-label>
+      <ion-input type="text" [(ngModel)]="product.description"></ion-input>
+      <ion-label>Quantity On Hand</ion-label>
+      <ion-input type="number" [(ngModel)]="product.quantityOnHand"></ion-input>
+      <ion-label>Price Per Unit</ion-label>
+      <ion-input type="number" [(ngModel)]="product.pricePerUnit"></ion-input>
+      <ion-label>Reorder Quantity</ion-label>
+      <ion-input type="number" [(ngModel)]="product.reorderQuantity"></ion-input>
+      <ion-button type="submit" (click)="confirm(false)">Edit</ion-button>
+      <ion-button type="outlined" color="error" (click)="confirm(true)">Delete</ion-button>
+    </ion-item>
+  </ion-card-content>
+</ion-card>

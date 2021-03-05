@@ -22,6 +22,6 @@ export class StorageDisplayComponent implements OnInit {
     this.sharedData.getProducts().then(products => this.products = products).catch(err => this.error = err);
   }
   redirect(product: Product) {
-    this.router.navigate(['tabs/tab4'], {state: {product}}).then();
+    this.router.navigate(['tabs/tab4'], {state: {pid: product.productId}}).then();
   }
 }

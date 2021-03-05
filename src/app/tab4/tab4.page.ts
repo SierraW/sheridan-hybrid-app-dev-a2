@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tab4',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab4Page implements OnInit {
 
-  constructor() { }
+  pid: string;
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    if (this.router.getCurrentNavigation().extras.state) {
+      this.pid = this.router.getCurrentNavigation().extras.state.pid;
+    }
   }
 
+  redirect() {
+    this.router.navigate(['tabs/tab3']).then();
+  }
 }
