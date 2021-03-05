@@ -11,7 +11,7 @@ import { AlertController } from '@ionic/angular';
 export class StorageEditComponent implements OnInit {
 
   @Input() pid: string;
-  @Output() outputDeleted: EventEmitter<boolean>;
+  @Output() outputDeleted = new EventEmitter<boolean>();
   product?: Product;
   constructor(private sharedData: StorageService, private alertController: AlertController) { }
 
