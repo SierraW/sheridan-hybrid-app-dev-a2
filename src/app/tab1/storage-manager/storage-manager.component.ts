@@ -24,6 +24,7 @@ export class StorageManagerComponent implements OnInit {
         this.sharedData.clearSelectedProduct();
         return true;
       } else {
+        this.storage = this.sharedData.currentStorageString.getValue();
         this.reservedStringWarning().then();
         return false;
       }

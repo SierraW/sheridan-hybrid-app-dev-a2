@@ -8,8 +8,8 @@
     <ion-button (click)="addStorage()">Add Storage</ion-button>
     <ion-button (click)="insertInitialValue()">Insert Initial Value</ion-button>
     <ion-list>
-      <ion-item *ngFor="let storageString of storageArr">
-        <p (click)="selectStorage(storageString)">{{storageString}}</p>
+      <ion-item *ngFor="let storageString of storageArr" (click)="selectStorage(storageString)">
+        <p>{{storageString}}</p>
       </ion-item>
     </ion-list>
   </ion-card-content>
