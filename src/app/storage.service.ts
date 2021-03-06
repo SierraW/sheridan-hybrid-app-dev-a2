@@ -87,7 +87,7 @@ export class StorageService {
   }
 
   removeProduct(productId: string): Promise<boolean> {
-    return this.setProduct({productId, description: '', pricePerUnit: 0, quantityOnHand: 0, reorderQuantity: 0});
+    return this.setProduct({productId, description: '', pricePerUnit: 0, quantityOnHand: 0, reorderQuantity: 0}, true);
   }
 
   removeAll(): Promise<boolean> {
