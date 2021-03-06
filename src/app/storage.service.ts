@@ -13,16 +13,36 @@ export class StorageService {
   sharedCurrentStorageString = this.currentStorageString.asObservable();
   selectedProduct = new BehaviorSubject<Product>({description: '', pricePerUnit: 0, productId: '', quantityOnHand: 0, reorderQuantity: 0});
   sharedSelectedProduct = this.selectedProduct.asObservable();
+  private reservedString = 'myStorage';
+  private storageStrings = 'storageStrings';
 
-  constructor(private secureStorage: SecureStorage) {}
-  setStorageString(storageString: string) {
+  constructor(private secureStorage: SecureStorage) {
+  }
+  setStorageString(storageString: string): boolean {
+    if (storageString === this.reservedString) {
+      return false;
+    }
     this.currentStorageString.next(storageString);
+    return true;
   }
   setSelectedProduct(product: Product) {
     this.selectedProduct.next(product);
   }
   clearSelectedProduct() {
     this.selectedProduct.next({description: '', pricePerUnit: 0, productId: '', quantityOnHand: 0, reorderQuantity: 0});
+  }
+  getMyStorageStrings(): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+      this.secureStorage.create(this.reservedString)
+        .then((storage: SecureStorageObject) => {
+          storage.get(this.storageStrings)
+            .then(data => resolve(JSON.parse(data)))
+            .catch(() => {
+              storage.set(this.storageStrings, JSON.stringify([])).then();
+              resolve([]);
+            });
+        });
+    });
   }
   getInitialProductData(): Product[] {
     return productDataJson;
@@ -64,7 +84,7 @@ export class StorageService {
                     });
                   resolve(result);
                 } else {
-                  reject('No product found with id: ' + id);
+                  resolve(result);
                 }
               }
             });
@@ -98,5 +118,12 @@ export class StorageService {
             .then(() => resolve(true), error => reject(error));
         });
     }));
+  }
+
+  updateStorageStrings(storageArr: string[]) {
+    this.secureStorage.create(this.reservedString)
+      .then((storage: SecureStorageObject) => {
+        storage.set(this.storageStrings, JSON.stringify(storageArr)).then();
+      });
   }
 }

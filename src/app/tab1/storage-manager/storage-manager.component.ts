@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StorageService} from '../../storage.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-storage-manager',
@@ -10,7 +11,7 @@ export class StorageManagerComponent implements OnInit {
   storage: string;
   storageArr: string[];
 
-  constructor(private sharedData: StorageService) {}
+  constructor(private sharedData: StorageService, private alertController: AlertController) {}
 
   ngOnInit() {
     this.sharedData.sharedCurrentStorageString.subscribe(storage => this.storage = storage);
@@ -19,16 +20,30 @@ export class StorageManagerComponent implements OnInit {
   }
 
   selectStorage(storageString: string) {
-    this.sharedData.setStorageString(storageString);
+    if (this.sharedData.currentStorageString.getValue() !== storageString) {
+      if (this.sharedData.setStorageString(storageString)) {
+        this.sharedData.clearSelectedProduct();
+      } else {
+        this.reservedStringWarning().then();
+      }
+    }
+  }
+  async reservedStringWarning() {
+    const alert = await this.alertController.create({
+      header: 'Switch Storage Failed',
+      message: 'The storage name you entered is reserved.',
+      buttons: ['Ok']
+    });
+    await alert.present();
   }
   addStorage() {
     if (!this.storageArr.includes(this.storage)) {
       this.storageArr.push(this.storage);
+      this.sharedData.updateStorageStrings(this.storageArr);
     }
     this.selectStorage(this.storage);
   }
   async insertInitialValue() {
-    const result: number[] = await this.sharedData.addProduct(this.sharedData.getInitialProductData());
-    console.log('For total of ', result[0], ' products, ', result[1], ' successfully inserted.');
+    await this.sharedData.addProduct(this.sharedData.getInitialProductData());
   }
 }

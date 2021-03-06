@@ -28,6 +28,6 @@ export class StorageAddRecordComponent implements OnInit {
         pricePerUnit: this.pricePerUnit,
         reorderQuantity: this.reorderQuantity
       }]
-    ).then(() => console.log('Insert successful.'));
+    ).then();
   }
 }

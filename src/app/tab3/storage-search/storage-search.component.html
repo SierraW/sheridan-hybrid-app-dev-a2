@@ -3,7 +3,7 @@
     <ion-card-subtitle>All Products</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
-    <ion-input type="text" placeholder="Product id (e.g. 123456789)" [(ngModel)]="searchString"></ion-input>
+    <ion-input type="text" placeholder="Product id" [(ngModel)]="searchString"></ion-input>
     <ion-button (click)="search()">Search</ion-button>
     <ion-text *ngIf="searchProducts.length === 0" color="error"><p>No result.</p></ion-text>
     <ion-list *ngIf="searchProducts.length > 0">
