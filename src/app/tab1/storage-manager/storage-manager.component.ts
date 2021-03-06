@@ -15,16 +15,17 @@ export class StorageManagerComponent implements OnInit {
 
   ngOnInit() {
     this.sharedData.sharedCurrentStorageString.subscribe(storage => this.storage = storage);
-    this.storageArr = [];
-    this.storageArr.push(this.storage);
+    this.sharedData.getMyStorageStrings().then(strings => this.storageArr = strings);
   }
 
-  selectStorage(storageString: string) {
+  selectStorage(storageString: string): boolean {
     if (this.sharedData.currentStorageString.getValue() !== storageString) {
       if (this.sharedData.setStorageString(storageString)) {
         this.sharedData.clearSelectedProduct();
+        return true;
       } else {
         this.reservedStringWarning().then();
+        return false;
       }
     }
   }
@@ -37,11 +38,10 @@ export class StorageManagerComponent implements OnInit {
     await alert.present();
   }
   addStorage() {
-    if (!this.storageArr.includes(this.storage)) {
+    if (this.selectStorage(this.storage) && !this.storageArr.includes(this.storage)) {
       this.storageArr.push(this.storage);
       this.sharedData.updateStorageStrings(this.storageArr);
     }
-    this.selectStorage(this.storage);
   }
   async insertInitialValue() {
     await this.sharedData.addProduct(this.sharedData.getInitialProductData());

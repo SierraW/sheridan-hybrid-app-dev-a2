@@ -9,12 +9,13 @@ import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage
   providedIn: 'root'
 })
 export class StorageService {
-  currentStorageString = new BehaviorSubject('storage');
+  private reservedString = 'myStorage';
+  private storageStrings = 'storageStrings';
+  private defaultStorage = 'storage';
+  currentStorageString = new BehaviorSubject(this.defaultStorage);
   sharedCurrentStorageString = this.currentStorageString.asObservable();
   selectedProduct = new BehaviorSubject<Product>({description: '', pricePerUnit: 0, productId: '', quantityOnHand: 0, reorderQuantity: 0});
   sharedSelectedProduct = this.selectedProduct.asObservable();
-  private reservedString = 'myStorage';
-  private storageStrings = 'storageStrings';
 
   constructor(private secureStorage: SecureStorage) {
   }
@@ -32,14 +33,14 @@ export class StorageService {
     this.selectedProduct.next({description: '', pricePerUnit: 0, productId: '', quantityOnHand: 0, reorderQuantity: 0});
   }
   getMyStorageStrings(): Promise<string[]> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.secureStorage.create(this.reservedString)
         .then((storage: SecureStorageObject) => {
           storage.get(this.storageStrings)
             .then(data => resolve(JSON.parse(data)))
             .catch(() => {
-              storage.set(this.storageStrings, JSON.stringify([])).then();
-              resolve([]);
+              storage.set(this.storageStrings, JSON.stringify([this.defaultStorage])).then();
+              resolve([this.defaultStorage]);
             });
         });
     });
@@ -62,7 +63,7 @@ export class StorageService {
   }
 
   getProducts(id: string= ''): Promise<Product[]> {
-    return new Promise<Product[]>((resolve, reject) => {
+    return new Promise<Product[]>((resolve) => {
       const result: Product[] = [];
       this.secureStorage.create(this.currentStorageString.getValue())
         .then((storage: SecureStorageObject) => {
