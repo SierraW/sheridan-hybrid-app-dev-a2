@@ -12,9 +12,6 @@ export class Tab4Page implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    if (this.router.getCurrentNavigation().extras.state) {
-      this.pid = this.router.getCurrentNavigation().extras.state.pid;
-    }
   }
 
   redirect() {

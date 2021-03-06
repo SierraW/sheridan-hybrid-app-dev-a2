@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Product} from '../../models/Product';
 import {StorageService} from '../../storage.service';
 import { AlertController } from '@ionic/angular';
@@ -9,8 +9,6 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./storage-edit.component.scss'],
 })
 export class StorageEditComponent implements OnInit {
-
-  @Input() pid: string;
   @Output() outputDeleted = new EventEmitter<boolean>();
   product?: Product;
   constructor(private sharedData: StorageService, private alertController: AlertController) { }
@@ -20,12 +18,7 @@ export class StorageEditComponent implements OnInit {
   }
 
   async refresh() {
-    const result = await this.sharedData.getProducts(this.pid);
-    if (result.length > 0) {
-      this.product = result[0];
-    } else {
-      this.product = undefined;
-    }
+    this.sharedData.sharedSelectedProduct.subscribe(pd => pd.productId === '' ? this.product = undefined : this.product = pd);
   }
 
   edit() {
@@ -37,7 +30,14 @@ export class StorageEditComponent implements OnInit {
   }
 
   delete() {
-    this.sharedData.removeProduct(this.pid).then(() => this.showAlert(true, true));
+    if (this.product) {
+      this.sharedData.removeProduct(this.product.productId).then(() => {
+        this.sharedData.clearSelectedProduct();
+        this.showAlert(true, true).then();
+      });
+    } else {
+      this.showAlert(false, true, 'Product not found.').then();
+    }
   }
 
   async confirm(isDeleting: boolean) {

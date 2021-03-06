@@ -11,10 +11,18 @@ import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage
 export class StorageService {
   currentStorageString = new BehaviorSubject('storage');
   sharedCurrentStorageString = this.currentStorageString.asObservable();
+  selectedProduct = new BehaviorSubject<Product>({description: '', pricePerUnit: 0, productId: '', quantityOnHand: 0, reorderQuantity: 0});
+  sharedSelectedProduct = this.selectedProduct.asObservable();
 
   constructor(private secureStorage: SecureStorage) {}
   setStorageString(storageString: string) {
     this.currentStorageString.next(storageString);
+  }
+  setSelectedProduct(product: Product) {
+    this.selectedProduct.next(product);
+  }
+  clearSelectedProduct() {
+    this.selectedProduct.next({description: '', pricePerUnit: 0, productId: '', quantityOnHand: 0, reorderQuantity: 0});
   }
   getInitialProductData(): Product[] {
     return productDataJson;
