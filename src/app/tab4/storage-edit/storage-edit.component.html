@@ -5,30 +5,25 @@
   </ion-card-header>
   <ion-card-content>
     <ion-button (click)="refresh()">Refresh</ion-button>
-    <ion-text *ngIf="!product" color="error" (click)="redirect()"><p>No item selected!</p></ion-text>
-    <ion-item *ngIf="product">
+    <ion-text *ngIf="product.productId === ''" color="danger" (click)="redirect()"><p>No item selected!</p></ion-text>
+    <div *ngIf="product.productId !== ''">
       <p>Product Id</p>
       <ion-input type="text" [(ngModel)]="product.productId"></ion-input>
-    </ion-item>
-    <ion-item>
+
       <p>Description</p>
       <ion-textarea type="text" [(ngModel)]="product.description"></ion-textarea>
-    </ion-item>
-    <ion-item>
+
       <p>Quantity On Hand</p>
       <ion-input type="number" [(ngModel)]="product.quantityOnHand"></ion-input>
-    </ion-item>
-    <ion-item>
+
       <p>Price Per Unit</p>
       <ion-input type="number" [(ngModel)]="product.pricePerUnit"></ion-input>
-    </ion-item>
-    <ion-item>
+
       <p>Reorder Quantity</p>
       <ion-input type="number" [(ngModel)]="product.reorderQuantity"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-button type="submit" (click)="confirm(false)">Edit</ion-button>
-      <ion-button type="outlined" color="error" (click)="confirm(true)">Delete</ion-button>
-    </ion-item>
+
+      <ion-button (click)="confirm(false)">Edit</ion-button>
+      <ion-button fill="outline" color="danger" (click)="confirm(true)">Delete</ion-button>
+    </div>
   </ion-card-content>
 </ion-card>

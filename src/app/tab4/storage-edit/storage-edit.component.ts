@@ -10,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class StorageEditComponent implements OnInit {
   @Output() outputDeleted = new EventEmitter<boolean>();
-  product?: Product;
+  product: Product;
   constructor(private sharedData: StorageService, private alertController: AlertController) { }
 
   ngOnInit() {
@@ -18,11 +18,11 @@ export class StorageEditComponent implements OnInit {
   }
 
   async refresh() {
-    this.sharedData.sharedSelectedProduct.subscribe(pd => pd.productId === '' ? this.product = undefined : this.product = pd);
+    this.sharedData.sharedSelectedProduct.subscribe(pd => this.product = pd);
   }
 
   edit() {
-    if (this.product) {
+    if (this.product.productId !== '') {
       this.sharedData.setProduct(this.product).then(() => this.showAlert(false, false));
     } else {
       this.showAlert(false, true, 'Product not found.').then();
@@ -30,7 +30,7 @@ export class StorageEditComponent implements OnInit {
   }
 
   delete() {
-    if (this.product) {
+    if (this.product.productId !== '') {
       this.sharedData.removeProduct(this.product.productId).then(() => {
         this.sharedData.clearSelectedProduct();
         this.showAlert(true, true).then();
