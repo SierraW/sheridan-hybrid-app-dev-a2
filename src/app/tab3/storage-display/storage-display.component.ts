@@ -48,13 +48,13 @@ export class StorageDisplayComponent implements OnInit {
   async deleteSuccessful() {
     const alert = await this.alertController.create({
       header: 'Erase',
-      message: 'Successfully delete data.',
+      message: 'Data delete success.',
       buttons: ['Ok']
     });
     await alert.present();
   }
 
   delete(product: Product) {
-    this.sharedData.removeProduct(product.productId).then(() => this.deleteSuccessful());
+    this.sharedData.removeProduct(product.productId).then(() => this.deleteSuccessful().then(() => this.getProducts()));
   }
 }

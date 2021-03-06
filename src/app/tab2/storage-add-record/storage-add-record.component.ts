@@ -34,7 +34,7 @@ export class StorageAddRecordComponent implements OnInit {
   async insertSuccessful() {
     const alert = await this.alertController.create({
       header: 'Insert',
-      message: 'Successfully insert.',
+      message: 'Insert success.',
       buttons: ['Ok']
     });
     await alert.present();
