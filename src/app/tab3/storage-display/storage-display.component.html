@@ -5,8 +5,8 @@
   <ion-card-content>
     <ion-text *ngIf="error !== ''" color="error"><p>Failed to retrieve data: {{error}}</p></ion-text>
     <ion-list *ngIf="error === ''">
-      <ion-item-sliding *ngFor="let product of products" (click)="redirect(product)">
-        <ion-item>
+      <ion-item-sliding *ngFor="let product of products">
+        <ion-item (click)="redirect(product)">
           <ion-text>
             <p>{{product.productId}}</p>
             <h3>{{product.description}}</h3>
