@@ -45,5 +45,14 @@ export class StorageManagerComponent implements OnInit {
   }
   async insertInitialValue() {
     await this.sharedData.addProduct(this.sharedData.getInitialProductData());
+    await this.insertSuccessful();
+  }
+  async insertSuccessful() {
+    const alert = await this.alertController.create({
+      header: 'Insert',
+      message: 'Successfully insert all data.',
+      buttons: ['Ok']
+    });
+    await alert.present();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Product} from '../../models/Product';
 import {StorageService} from '../../storage.service';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-storage-add-record',
@@ -14,7 +14,7 @@ export class StorageAddRecordComponent implements OnInit {
   quantityOnHand: number;
   pricePerUnit: number;
   reorderQuantity: number;
-  constructor(private sharedData: StorageService) { }
+  constructor(private sharedData: StorageService, private alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -29,5 +29,14 @@ export class StorageAddRecordComponent implements OnInit {
         reorderQuantity: this.reorderQuantity
       }]
     ).then();
+    this.insertSuccessful().then();
+  }
+  async insertSuccessful() {
+    const alert = await this.alertController.create({
+      header: 'Insert',
+      message: 'Successfully insert.',
+      buttons: ['Ok']
+    });
+    await alert.present();
   }
 }
